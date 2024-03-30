@@ -15,3 +15,29 @@ changeTodoPriority(myToDo, "Low")
 console.log(myToDo)
 
 console.log(myToDo.getFormattedDueDate())
+
+
+import Project from './project';
+
+
+const defaultProject = new Project('Default');
+const workProject = new Project('Work');
+const personalProject = new Project('Personal');
+
+
+
+const todo1 = new ToDo('Finish project', 'Complete by end of the week', '2024-03-31', 'High');
+const todo2 = new ToDo('Buy groceries', 'Milk, Eggs, Bread', '2024-04-01', 'Medium');
+
+
+defaultProject.addTodo(todo1);
+personalProject.addTodo(todo2);
+personalProject.addTodo(todo1);
+
+
+console.log('Default Project Todos:', defaultProject.todos);
+console.log('Personal Project Todos:', personalProject.todos);
+
+
+defaultProject.removeTodo(todo1);
+console.log('Default Project Todos after removal:', defaultProject.todos);
