@@ -1,6 +1,13 @@
 import changeTodoPriority from "./change_priority.js";
 import ToDo from "./new_todo.js"
 import markTodoAsComplete from "./update_todo.js"
+import { saveProjects, loadProjects } from "./storage";
+
+let projects = [];
+
+
+saveProjects(projects);
+loadProjects(projects);
 
 const myToDo = new ToDo("Finish assignment", "Complete the JavaScript assignment by Friday", "2023-12-31", "High");
 
@@ -21,7 +28,6 @@ import Project from './project';
 
 
 const defaultProject = new Project('Default');
-const workProject = new Project('Work');
 const personalProject = new Project('Personal');
 
 
@@ -39,5 +45,5 @@ console.log('Default Project Todos:', defaultProject.todos);
 console.log('Personal Project Todos:', personalProject.todos);
 
 
-defaultProject.removeTodo(todo1);
+defaultProject.removeTodo(todo1.id);
 console.log('Default Project Todos after removal:', defaultProject.todos);

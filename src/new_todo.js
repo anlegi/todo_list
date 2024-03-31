@@ -1,10 +1,12 @@
-import { format } from 'date-fns';
+import { compareAsc, format } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
 
 class ToDo {
   constructor(title, description, dueDate, priority, notes = [], checklist = []) {
+    this.id = uuidv4(); // assign a unique ID
     this.title = title;
     this.description = description;
-    this.dueDate = new Date(dueDate);
+    this.dueDate = format(new Date(dueDate), "yyyy-MM-dd");
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
