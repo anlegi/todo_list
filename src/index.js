@@ -1,49 +1,81 @@
-import changeTodoPriority from "./change_priority.js";
-import ToDo from "./new_todo.js"
-import markTodoAsComplete from "./update_todo.js"
+import { displayProjects, displayTodos } from "./display";
 import { saveProjects, loadProjects } from "./storage";
+import Project from "./project";
+import ToDo from "./new_todo";
+import displayUnassignedTodos from "./display_todo"
 
+
+// Stores all of our projects
 let projects = [];
 
-
-saveProjects(projects);
 loadProjects(projects);
-
-const myToDo = new ToDo("Finish assignment", "Complete the JavaScript assignment by Friday", "2023-12-31", "High");
-
-myToDo.addChecklistItem('Setup project structure', true);
-myToDo.addChecklistItem('Implement feature X');
-
-// console.log(myToDo.isComplete)
-// markTodoAsComplete(myToDo)
-
-// console.log(myToDo.isComplete)
-changeTodoPriority(myToDo, "Low")
-console.log(myToDo)
-
-console.log(myToDo.getFormattedDueDate())
-
-
-import Project from './project';
-
-
-const defaultProject = new Project('Default');
-const personalProject = new Project('Personal');
+saveProjects(projects);
 
 
 
-const todo1 = new ToDo('Finish project', 'Complete by end of the week', '2024-03-31', 'High');
-const todo2 = new ToDo('Buy groceries', 'Milk, Eggs, Bread', '2024-04-01', 'Medium');
+document.addEventListener('DOMContentLoaded', displayProjects(projects));
 
+document.getElementById('addProject').addEventListener('click', function() {
+  const projectName = document.getElementById('newProjectName').value;
+  console.log("Project name: ", projectName);
+  if (projectName) {
+    const newProject = new Project(projectName);
+    projects.push(newProject);
+    displayProjects(projects);
+    document.getElementById('newProjectName').value = '';
+  }
+});
 
-defaultProject.addTodo(todo1);
-personalProject.addTodo(todo2);
-personalProject.addTodo(todo1);
+document.getElementById('addTodo').addEventListener('click', function() {
+  const myTasks = document.querySelector("#todoList");
+  const todoTitle = document.getElementById("newTodoTitle").value;
+  const description = document.getElementById("description").value;
+  const dueDate = document.getElementById("date").value;
+  const priority = document.getElementById("newTodoPriority").value;
+  const newTodo = new ToDo(todoTitle, description, dueDate, priority);
 
+  const todoItem = document.createElement('div');
+  todoItem.classList.add('todo-item');
+  todoItem.innerHTML = `
+    <h3>${newTodo.title}</h3>
+    <p>Due Date: ${newTodo.getFormattedDueDate()}</p>
+    <label><input type="checkbox" class="todo-done-checkbox" ${newTodo.isComplete ? "checked" : ""}> Done</label>
+    <button class="details">Details</button>
+    <button class="delete-todo">Delete</button>
+  `;
 
-console.log('Default Project Todos:', defaultProject.todos);
-console.log('Personal Project Todos:', personalProject.todos);
+  // Attach a click event listener to the details button inside the todo item
+  todoItem.querySelector('.details').addEventListener("click", () => {
+    const dialog = document.createElement("dialog");
+    dialog.innerHTML = `
+      <h3>${newTodo.title}</h3>
+      <p>Due Date: ${newTodo.getFormattedDueDate()}</p>
+      <p>Description: ${newTodo.description}</p>
+      <p>Priority: ${newTodo.priority}</p>
+      <p>Done: ${newTodo.isComplete}</p>
+      <button class="close-dialog">Close</button>
+    `;
 
+    document.body.appendChild(dialog);
 
-defaultProject.removeTodo(todo1.id);
-console.log('Default Project Todos after removal:', defaultProject.todos);
+    const checkbox = todoItem.querySelector('.todo-done-checkbox');
+    checkbox.addEventListener('change', (e) => {
+      newTodo.isComplete = e.target.checked;
+    });
+
+    // Close button inside the dialog
+    dialog.querySelector('.close-dialog').addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.showModal();
+  });
+
+  myTasks.appendChild(todoItem);
+
+  // Reset input fields
+  document.getElementById("newTodoTitle").value = '';
+  document.getElementById("description").value = '';
+  document.getElementById("date").value = '';
+  document.getElementById("newTodoPriority").value = 'Priority';
+});

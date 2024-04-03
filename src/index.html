@@ -6,6 +6,27 @@
   <title>TODO List</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="projectInput">
+    <input type="text" id="newProjectName" placeholder="New Project Name">
+    <button id="addProject">Add Project</button>
+  </div>
+
+  <ul id="projectList"></ul>
+
+  <div id="todoInput">
+    <input type="text" id="newTodoTitle" placeholder="Todo Title">
+    <input type="text" id="description" placeholder="Description">
+    <input type="date" id="date">
+    <label for="newTodoPriority"></label>
+      <select id="newTodoPriority" name="priority">
+        <option value="High">High</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Low">Low</option>
+      </select>
+
+    <button id="addTodo">Add Todo</button>
+  </div>
+
+  <div id="todoList"></div>
 </body>
 </html>

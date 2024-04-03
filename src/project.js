@@ -1,5 +1,3 @@
-import ToDo from "./new_todo.js";
-
 class Project {
   constructor(name) {
     this.name = name
@@ -20,4 +18,4 @@ class Project {
 }
 
 
-export default Project
+export default Project;

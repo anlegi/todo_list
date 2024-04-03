@@ -1,26 +1,14 @@
-import { compareAsc, format } from 'date-fns';
+import { format, parseISO} from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
 class ToDo {
-  constructor(title, description, dueDate, priority, notes = [], checklist = []) {
+  constructor(title, description, dueDate, priority) {
     this.id = uuidv4(); // assign a unique ID
     this.title = title;
     this.description = description;
-    this.dueDate = format(new Date(dueDate), "yyyy-MM-dd");
+    this.dueDate = dueDate;
     this.priority = priority;
-    this.notes = notes;
-    this.checklist = checklist;
     this.isComplete = false;
-  }
-
-  addChecklistItem(itemDescription, completed = false) {
-    this.checklist.push({ description: itemDescription, completed });
-  }
-
-  markChecklistItemCompleted(index) {
-    if (index >= 0 && index < this.checklist.length) {
-      this.checklist[index].completed = true;
-    }
   }
 
   updatePriority(newPriority) {
@@ -28,7 +16,16 @@ class ToDo {
   }
 
   getFormattedDueDate() {
-    return format(this.dueDate, 'PPP');
+    // Check if dueDate is truthy to avoid errors with empty or undefined values
+    return this.dueDate ? format(parseISO(this.dueDate), 'PPP') : 'No due date';
+  }
+
+  markTodoAsComplete() {
+    this.isComplete = true
+  }
+
+  changeTodoPriority(newPriority) {
+    this.priority = newPriority
   }
 }
 
