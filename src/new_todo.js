@@ -2,13 +2,14 @@ import { format, parseISO} from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
 class ToDo {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, project) {
     this.id = uuidv4(); // assign a unique ID
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.isComplete = false;
+    this.project = project
   }
 
   updatePriority(newPriority) {
@@ -17,7 +18,7 @@ class ToDo {
 
   getFormattedDueDate() {
     // Check if dueDate is truthy to avoid errors with empty or undefined values
-    return this.dueDate ? format(parseISO(this.dueDate), 'PPP') : 'No due date';
+    return this.dueDate ? format(parseISO(this.dueDate), 'd. MMM. y') : 'No due date';
   }
 
   markTodoAsComplete() {
