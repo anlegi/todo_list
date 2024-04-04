@@ -15,6 +15,15 @@ class Project {
   getTodo(todoId) {
     return this.todos.find(todo => todo.id === todoId)
   }
+  // TODO implement static remove project function
+  removeProject() {
+    localStorage.projects.forEach(project => {
+      if (project.name == this.name) {
+        localStorage.removeItem()
+      }
+    });
+  }
+
 }
 
 

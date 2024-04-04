@@ -1,19 +1,28 @@
 import { displayProjects, displayTodos } from "./display";
-import { saveProjects, loadProjects } from "./storage";
+import {saveProjectsToLocalStorage, loadProjectsFromLocalStorage} from "./storage";
 import Project from "./project";
 import ToDo from "./new_todo";
 import './style.css';
+import { projects } from "./project_arr";
 
 
 
 // Stores all of our projects
-const myTaskProject = new Project("My Tasks");
-let projects = [myTaskProject];
+// const myTaskProject = new Project("My Tasks");
+// let projects = [myTaskProject];
+
+
+
 
 // loadProjects(projects);
 // saveProjects(projects);
 
-document.addEventListener('DOMContentLoaded', displayProjects(projects));
+// document.addEventListener('DOMContentLoaded', displayProjects(projects));
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadProjectsFromLocalStorage();
+  displayProjects(projects);
+});
 
 document.getElementById('addProject').addEventListener('click', function() {
   const projectName = document.getElementById('newProjectName').value;
@@ -24,6 +33,7 @@ document.getElementById('addProject').addEventListener('click', function() {
     displayProjects(projects);
     document.getElementById('newProjectName').value = '';
   }
+  saveProjectsToLocalStorage();
 });
 
 
@@ -56,8 +66,9 @@ document.querySelector('#todoDialog form').addEventListener('submit', function(e
   } else {
     console.error('Selected project not found');
   }
-});
 
+  saveProjectsToLocalStorage();
+});
 
 
 

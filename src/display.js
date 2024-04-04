@@ -2,11 +2,11 @@
 function displayProjects(projects) {
   const projectList = document.getElementById('projectList');
   const projectDropdown = document.getElementById("project")
-  projectList.innerHTML = ""; 
+  projectList.innerHTML = "";
   projectDropdown.innerHTML = "";
 
   console.log(projects)
-
+  // TODO add delete button on project item and call remove project function
   // Loop through all projects and create an element for each
   projects.forEach(project => {
     const projectElement = document.createElement('div');
