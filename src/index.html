@@ -11,27 +11,25 @@
     <button id="addProject">Add Project</button>
   </div>
 
-  <div id="projectList"></div>
+  <div id="projectList"><h3>My Projects</h3></div>
 
-  <div id="todoInput">
-    <input type="text" id="newTodoTitle" placeholder="Todo Title">
-    <input type="text" id="description" placeholder="Description">
-    <input type="date" id="date">
-    <label for="newTodoPriority"></label>
+  <button id="openTodoDialog">+ Add task</button>
+
+  <dialog id="todoDialog">
+    <form method="dialog">
+      <input type="text" id="newTodoTitle" placeholder="Todo Title">
+      <input type="text" id="description" placeholder="Description">
+      <input type="date" id="date">
       <select id="newTodoPriority" name="priority">
         <option value="High">High</option>
         <option value="Medium" selected>Medium</option>
         <option value="Low">Low</option>
       </select>
-      <label for="project"></label>
-      <select id="project" name="project">
-        <!-- <option value="project">High</option>
-        <option value="Medium" selected>Medium</option>
-        <option value="Low">Low</option> -->
-      </select>
-
-    <button id="addTodo">Add Todo</button>
-  </div>
+      <select id="project" name="project"></select>
+      <button type="submit" id="addTodo">Add task</button>
+      <button type="button" id="cancelTodo">Cancel</button>
+    </form>
+  </dialog>
 
   <div id="todoList"></div>
 </body>

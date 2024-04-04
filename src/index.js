@@ -26,8 +26,18 @@ document.getElementById('addProject').addEventListener('click', function() {
   }
 });
 
-document.getElementById('addTodo').addEventListener('click', function() {
-  const myTasks = document.querySelector("#todoList");
+
+document.getElementById('openTodoDialog').addEventListener('click', function() {
+  document.getElementById('todoDialog').showModal();
+});
+
+document.getElementById('cancelTodo').addEventListener('click', function() {
+  document.getElementById('todoDialog').close();
+});
+
+document.querySelector('#todoDialog form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting in the traditional way
+
   const todoTitle = document.getElementById("newTodoTitle").value;
   const description = document.getElementById("description").value;
   const dueDate = document.getElementById("date").value;
@@ -35,34 +45,29 @@ document.getElementById('addTodo').addEventListener('click', function() {
   const selectedProjectName = document.getElementById("project").value;
   const selectedProject = projects.find(project => project.name === selectedProjectName);
 
-  const newTodo = new ToDo(todoTitle, description, dueDate, priority, selectedProject)
-
-  console.log("Selected project name:", selectedProjectName);
-
   if (selectedProject) {
+    const newTodo = new ToDo(todoTitle, description, dueDate, priority, selectedProject);
     selectedProject.addTodo(newTodo);
     displayTodos(selectedProject);
+
+    // Close dialog and reset form
+    document.getElementById('todoDialog').close();
+    event.target.reset();
   } else {
     console.error('Selected project not found');
   }
-
-  // selectedProject.addTodo(todoItem);
-  displayTodos(selectedProject);
-
-  // Reset input fields
-  document.getElementById("newTodoTitle").value = '';
-  document.getElementById("description").value = '';
-  document.getElementById("date").value = '';
-  document.getElementById("newTodoPriority").value = 'Priority';
 });
 
 
 
 
-document.getElementById('project').addEventListener('change', function() {
-  const selectedProjectName = this.value;
-  const selectedProject = projects.find(project => project.name === selectedProjectName);
-  if (selectedProject) {
-    displayTodos(selectedProject);
-  }
-});
+
+
+
+// document.getElementById('project').addEventListener('change', function() {
+//   const selectedProjectName = this.value;
+//   const selectedProject = projects.find(project => project.name === selectedProjectName);
+//   if (selectedProject) {
+//     displayTodos(selectedProject);
+//   }
+// });

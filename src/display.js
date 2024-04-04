@@ -2,7 +2,7 @@
 function displayProjects(projects) {
   const projectList = document.getElementById('projectList');
   const projectDropdown = document.getElementById("project")
-  projectList.innerHTML = "";
+  projectList.innerHTML = ""; 
   projectDropdown.innerHTML = "";
 
   console.log(projects)
