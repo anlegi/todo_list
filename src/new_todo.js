@@ -2,14 +2,14 @@ import { format, parseISO} from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
 class ToDo {
-  constructor(title, description, dueDate, priority, project) {
+  constructor(title, description, dueDate, priority, projectId) {
     this.id = uuidv4(); // assign a unique ID
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.isComplete = false;
-    this.project = project
+    this.projectId = projectId;
   }
 
   updatePriority(newPriority) {

@@ -1,39 +1,27 @@
 import { displayProjects, displayTodos } from "./display";
-import {saveProjectsToLocalStorage, loadProjectsFromLocalStorage} from "./storage";
+import {initializeLocalStorage, loadProjectsFromLocalStorage, saveProjectToLocalStorage, getProjectsFromLocalStorage} from "./storage";
+import { defaultLocalStorage } from "./storage";
 import Project from "./project";
 import ToDo from "./new_todo";
 import './style.css';
-import { projects } from "./project_arr";
-
-
-
-// Stores all of our projects
-// const myTaskProject = new Project("My Tasks");
-// let projects = [myTaskProject];
-
-
-
-
-// loadProjects(projects);
-// saveProjects(projects);
-
-// document.addEventListener('DOMContentLoaded', displayProjects(projects));
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadProjectsFromLocalStorage();
-  displayProjects(projects);
+  initializeLocalStorage();
+  displayProjects(defaultLocalStorage);
+  loadProjectsFromLocalStorage()
 });
+
 
 document.getElementById('addProject').addEventListener('click', function() {
   const projectName = document.getElementById('newProjectName').value;
   console.log("Project name: ", projectName);
   if (projectName) {
     const newProject = new Project(projectName);
-    projects.push(newProject);
-    displayProjects(projects);
+    saveProjectToLocalStorage(newProject);
+    displayProjects(getProjectsFromLocalStorage());
     document.getElementById('newProjectName').value = '';
   }
-  saveProjectsToLocalStorage();
+  // saveProjectsToLocalStorage();
 });
 
 
@@ -53,21 +41,23 @@ document.querySelector('#todoDialog form').addEventListener('submit', function(e
   const dueDate = document.getElementById("date").value;
   const priority = document.getElementById("newTodoPriority").value;
   const selectedProjectName = document.getElementById("project").value;
+
+  const projects = getProjectsFromLocalStorage();
   const selectedProject = projects.find(project => project.name === selectedProjectName);
+  const selectedProjectWithMethod = Project.fromPlainObject(selectedProject)
+  console.log(selectedProjectWithMethod)
 
-  if (selectedProject) {
-    const newTodo = new ToDo(todoTitle, description, dueDate, priority, selectedProject);
-    selectedProject.addTodo(newTodo);
-    displayTodos(selectedProject);
-
+  if (selectedProjectWithMethod) {
+    const newTodo = new ToDo(todoTitle, description, dueDate, priority, selectedProject.id);
+    selectedProjectWithMethod.addTodo(newTodo);
+    // saveProjectToLocalStorage(selectedProjectWithMethod);
+    displayTodos(selectedProjectWithMethod);
     // Close dialog and reset form
     document.getElementById('todoDialog').close();
     event.target.reset();
   } else {
     console.error('Selected project not found');
   }
-
-  saveProjectsToLocalStorage();
 });
 
 

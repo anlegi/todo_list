@@ -1,3 +1,4 @@
+import Project from "./project";
 
 function displayProjects(projects) {
   const projectList = document.getElementById('projectList');
@@ -14,11 +15,15 @@ function displayProjects(projects) {
     projectElement.classList.add('project-item');
     projectList.appendChild(projectElement);
 
+    const deleteBtn = document.createElement("button")
+    deleteBtn.textContent = "Delete"
+    deleteBtn.classList.add("delete-project")
+    projectList.appendChild(deleteBtn)
+
     const optionElement = document.createElement("option")
     optionElement.value = project.name
     optionElement.textContent = project.name
     projectDropdown.appendChild(optionElement)
-
 
     projectElement.addEventListener('click', () => {
       // Remove class from all project items
@@ -26,16 +31,24 @@ function displayProjects(projects) {
         item.classList.remove('active-project');
       });
 
-      // Add class to the clicked project
-      projectElement.classList.add('active-project');
+    // Add class to the clicked project
+    projectElement.classList.add('active-project');
 
-      displayTodos(project); // Display todos associated with this project
+    displayTodos(project); // Display todos associated with this project
     });
+
+
+    deleteBtn.addEventListener("click", () => {
+      Project.removeProject(project.name)
+
+      displayProjects(JSON.parse(localStorage.getItem('projects')) || []); // update the display to reflect the removal
+    })
   });
 }
 
 
 function displayTodos(selectedProject) {
+  console.log(selectedProject)
   const todoList = document.getElementById('todoList');
   todoList.innerHTML = ''; // Clear existing todos
 
@@ -86,7 +99,7 @@ function displayTodos(selectedProject) {
 
     // Delete todo functionality (make sure this works as intended)
     todoItem.querySelector('.delete-todo').addEventListener('click', () => {
-      selectedProject.removeTodo(todo.id);
+      //selectedProject.removeTodo(todo.id);
       displayTodos(selectedProject); // Refresh the todo list for the current project
     });
 
