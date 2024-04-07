@@ -1,4 +1,6 @@
 import Project from "./project";
+import ToDo from "./new_todo";
+import { getOneProjectFromLocalStorage } from "./storage";
 
 function displayProjects(projects) {
   const projectList = document.getElementById('projectList');
@@ -6,7 +8,6 @@ function displayProjects(projects) {
   projectList.innerHTML = "";
   projectDropdown.innerHTML = "";
 
-  console.log(projects)
   // TODO add delete button on project item and call remove project function
   // Loop through all projects and create an element for each
   projects.forEach(project => {
@@ -31,10 +32,10 @@ function displayProjects(projects) {
         item.classList.remove('active-project');
       });
 
-    // Add class to the clicked project
-    projectElement.classList.add('active-project');
+      // Add class to the clicked project
+      projectElement.classList.add('active-project');
 
-    displayTodos(project); // Display todos associated with this project
+      displayTodos(getOneProjectFromLocalStorage(project.id)); // Display todos associated with this project
     });
 
 
@@ -48,7 +49,6 @@ function displayProjects(projects) {
 
 
 function displayTodos(selectedProject) {
-  console.log(selectedProject)
   const todoList = document.getElementById('todoList');
   todoList.innerHTML = ''; // Clear existing todos
 
@@ -58,16 +58,16 @@ function displayTodos(selectedProject) {
   todoList.appendChild(projectNameHeader);
 
   // Loop through todos in the selected project and create elements for each
-
   selectedProject.todos.forEach(todo => {
+    const todoObject = ToDo.fromPlainObject(todo)
     const todoItem = document.createElement('div');
     todoItem.classList.add('todo-item');
     todoItem.innerHTML = `
-      <h3>${todo.title}</h3>
-      <p>Description: ${todo.description}</p>
-      <p>Due Date: ${todo.getFormattedDueDate()}</p>
-      <p>Priority: ${todo.priority}</p>
-      <label><input type="checkbox" class="todo-done-checkbox" ${todo.isComplete ? "checked" : ""}> Done</label>
+      <h3>${todoObject.title}</h3>
+      <p>Description: ${todoObject.description}</p>
+      <p>Due Date: ${todoObject.getFormattedDueDate()}</p>
+      <p>Priority: ${todoObject.priority}</p>
+      <label><input type="checkbox" class="todo-done-checkbox" ${todoObject.isComplete ? "checked" : ""}> Done</label>
       <button class="details">Details</button>
       <button class="delete-todo">Delete</button>
     `;
@@ -75,18 +75,18 @@ function displayTodos(selectedProject) {
     todoItem.querySelector('.details').addEventListener("click", () => {
       const dialog = document.createElement("dialog");
       dialog.innerHTML = `
-        <h3>${todo.title}</h3>
-        <p>Due Date: ${todo.getFormattedDueDate()}</p>
-        <p>Description: ${todo.description}</p>
-        <p>Priority: ${todo.priority}</p>
-        <p>Done: ${todo.isComplete}</p>
+        <h3>${todoObject.title}</h3>
+        <p>Du e Date: ${todoObject.getFormattedDueDate()}</p>
+        <p>Description: ${todoObject.description}</p>
+        <p>Priority: ${todoObject.priority}</p>
+        <p>Done: ${todoObject.isComplete}</p>
         <button class="close-dialog">Close</button>
       `;
       document.body.appendChild(dialog);
 
       const checkbox = todoItem.querySelector('.todo-done-checkbox');
         checkbox.addEventListener('change', (e) => {
-          todo.isComplete = e.target.checked;
+          todoObject.isComplete = e.target.checked;
         });
 
         // Close button inside the dialog

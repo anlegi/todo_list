@@ -4,14 +4,22 @@ import ToDo from "./new_todo";
 export const defaultLocalStorage = [new Project("My Tasks")];
 
 function initializeLocalStorage() {
-  localStorage.setItem('projects', JSON.stringify(defaultLocalStorage));
+  if (JSON.parse(localStorage.getItem("projects")) === null) {
+    localStorage.setItem('projects', JSON.stringify(defaultLocalStorage));
+  }
 }
 
 function getProjectsFromLocalStorage() {
   return JSON.parse(localStorage.getItem("projects"))
 }
 
+function getOneProjectFromLocalStorage(projectId){
+  let allProjects = getProjectsFromLocalStorage();
+  return allProjects.find(project => project.id === projectId)
+}
+
 function saveProjectToLocalStorage(project){
+  Project.removeProject(project.name)
   const projectData = localStorage.getItem("projects")
   const projects = JSON.parse(projectData)
   projects.push(project)
@@ -41,4 +49,8 @@ function loadProjectsFromLocalStorage() {
 
 
 
-export {initializeLocalStorage, loadProjectsFromLocalStorage, saveProjectToLocalStorage, getProjectsFromLocalStorage}
+export {initializeLocalStorage,
+        loadProjectsFromLocalStorage,
+        saveProjectToLocalStorage,
+        getProjectsFromLocalStorage,
+        getOneProjectFromLocalStorage}

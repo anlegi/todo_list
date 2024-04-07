@@ -7,8 +7,8 @@ import './style.css';
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeLocalStorage();
-  displayProjects(defaultLocalStorage);
-  loadProjectsFromLocalStorage()
+  displayProjects(loadProjectsFromLocalStorage());
+  //
 });
 
 
@@ -45,12 +45,13 @@ document.querySelector('#todoDialog form').addEventListener('submit', function(e
   const projects = getProjectsFromLocalStorage();
   const selectedProject = projects.find(project => project.name === selectedProjectName);
   const selectedProjectWithMethod = Project.fromPlainObject(selectedProject)
-  console.log(selectedProjectWithMethod)
+  console.log("submit: ", selectedProjectWithMethod)
 
   if (selectedProjectWithMethod) {
     const newTodo = new ToDo(todoTitle, description, dueDate, priority, selectedProject.id);
     selectedProjectWithMethod.addTodo(newTodo);
-    // saveProjectToLocalStorage(selectedProjectWithMethod);
+    // TODO: Implement save todo to localstorage
+    saveProjectToLocalStorage(selectedProjectWithMethod);
     displayTodos(selectedProjectWithMethod);
     // Close dialog and reset form
     document.getElementById('todoDialog').close();

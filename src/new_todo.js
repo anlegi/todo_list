@@ -28,6 +28,12 @@ class ToDo {
   changeTodoPriority(newPriority) {
     this.priority = newPriority
   }
+
+  // Method to create a project instance from a plain object
+  static fromPlainObject(obj) {
+    const todo = new ToDo(obj.title, obj.description, obj.dueDate, obj.priority, obj.projectId);
+    return todo;
+  }
 }
 
 export default ToDo;
