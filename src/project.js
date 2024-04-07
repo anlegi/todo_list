@@ -16,7 +16,17 @@ class Project {
   }
 
   removeTodo(todoId) {
-    this.todos = this.todos.filter(todo => todo.id !== todoId)
+    const projectData = localStorage.getItem("projects")
+
+    if (projectData) {
+      const projects = JSON.parse(projectData)
+      const updatedProject = projects.find(project => project.name === this.name)
+      updatedProject.todos = updatedProject.todos.filter(todo => todo.id !== todoId)
+      const newProjects = projects.filter(project => project.name !== this.name)
+      newProjects.push(updatedProject)
+      localStorage.setItem("projects", JSON.stringify(newProjects))
+    }
+
   }
 
   getTodo(todoId) {

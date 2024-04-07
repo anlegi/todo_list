@@ -35,6 +35,7 @@ function displayProjects(projects) {
       // Add class to the clicked project
       projectElement.classList.add('active-project');
 
+      console.log("displayProject:", )
       displayTodos(getOneProjectFromLocalStorage(project.id)); // Display todos associated with this project
     });
 
@@ -42,13 +43,16 @@ function displayProjects(projects) {
     deleteBtn.addEventListener("click", () => {
       Project.removeProject(project.name)
 
-      displayProjects(JSON.parse(localStorage.getItem('projects')) || []); // update the display to reflect the removal
+      displayProjects(JSON.parse(localStorage.getItem('projects')) || []);
+      displayTodos(getOneProjectFromLocalStorage(project.id) || []); // update the display to reflect the removal
     })
   });
 }
 
 
 function displayTodos(selectedProject) {
+  selectedProject = Project.fromPlainObject(selectedProject);
+
   const todoList = document.getElementById('todoList');
   todoList.innerHTML = ''; // Clear existing todos
 
@@ -97,10 +101,11 @@ function displayTodos(selectedProject) {
       dialog.showModal();
     })
 
-    // Delete todo functionality (make sure this works as intended)
+    // Delete todo
     todoItem.querySelector('.delete-todo').addEventListener('click', () => {
       //selectedProject.removeTodo(todo.id);
-      displayTodos(selectedProject); // Refresh the todo list for the current project
+      selectedProject.removeTodo(todo.id)
+      displayTodos(getOneProjectFromLocalStorage(selectedProject.id)); // Refresh the todo list for the current project
     });
 
     todoList.appendChild(todoItem);
