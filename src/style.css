@@ -1,14 +1,7 @@
+/*TODO: organize with sass and beat up sassy mentor*/
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-}
-
-.active-project {
-  background-color: rgb(226, 225, 219);
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-left: 40px;
-  /* margin-right: 5px; */
 }
 
 .container {
@@ -53,10 +46,11 @@ body {
   background-color: rgb(226, 225, 219);
 }
 
-#project-list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+/*TODO: margin right bigger than left */
+#projectList {
+  /* display: flex;
+  flex-direction: column; */
+  margin-left: 12px;
 }
 
 .project-row {
@@ -69,10 +63,10 @@ body {
   border-radius: 4px;
 }
 
-.project-row, .project-item {
+/* .project-row, .project-item {
   padding: 5px;
   margin: 0;
-}
+} */
 
 .project-item {
   flex-grow: 1; /* Allows it to grow and fill available space within .project-row */
@@ -80,9 +74,18 @@ body {
   padding-top: 15px;
   padding-bottom: 10px;
   padding-right: 15px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   padding-left: 7px;
   color: rgb(130, 130, 130);
+}
+
+.active-project {
+  background-color: rgb(226, 225, 219);
+  color: white;
+  /* padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 40px; */
+  /* margin-right: 5px; */
 }
 
 .delete-project {
@@ -97,14 +100,14 @@ body {
 .delete-project {
   border: none;
   background-color: rgb(226, 225, 219);
-  border-radius: 4px;
-  padding: 3px 8px;
   color: white;
 }
 
 .project-row:hover {
   background-color: rgb(226, 225, 219);
-  margin-left: 7px;
+  border-radius: 4px;
+  /* padding: 3px 8px; */
+  /* margin-left: 7px; */
 }
 
 #todoDialog {
