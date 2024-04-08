@@ -11,15 +11,20 @@ function displayProjects(projects) {
   // TODO add delete button on project item and call remove project function
   // Loop through all projects and create an element for each
   projects.forEach(project => {
+    const projectRow = document.createElement("div")
     const projectElement = document.createElement('div');
+    projectRow.classList.add("project-row")
     projectElement.textContent = project.name;
     projectElement.classList.add('project-item');
-    projectList.appendChild(projectElement);
+
+    projectRow.appendChild(projectElement);
+    projectList.appendChild(projectRow)
 
     const deleteBtn = document.createElement("button")
     deleteBtn.textContent = "Delete"
     deleteBtn.classList.add("delete-project")
-    projectList.appendChild(deleteBtn)
+    projectRow.appendChild(deleteBtn)
+    projectList.appendChild(projectRow)
 
     const optionElement = document.createElement("option")
     optionElement.value = project.name

@@ -24,10 +24,19 @@ document.getElementById('addProject').addEventListener('click', function() {
   // saveProjectsToLocalStorage();
 });
 
+document.getElementById('cancelProject').addEventListener('click', function() {
+  document.getElementById('projectDialog').close();
+});
+
 
 document.getElementById('openTodoDialog').addEventListener('click', function() {
   document.getElementById('todoDialog').showModal();
 });
+
+document.getElementById('openProjectDialog').addEventListener('click', function() {
+  document.getElementById('projectDialog').showModal();
+});
+
 
 document.getElementById('cancelTodo').addEventListener('click', function() {
   document.getElementById('todoDialog').close();

@@ -6,31 +6,50 @@
   <title>TODO List</title>
 </head>
 <body>
-  <div id="projectInput">
-    <input type="text" id="newProjectName" placeholder="Project Name">
-    <button id="addProject">+ Add Project</button>
+  <div class="container">
+    <div class="sidebar">
+      <div class="openTodoDialog"><button id="openTodoDialog">+ Add task</button></div>
+      <div class="openProjectDialog"><button id="openProjectDialog">+ Add Project</button></div>
+      <p id="myproject-title">My Projects</p>
+      <div id="projectList"></div>
+    </div>
+
+    <div class="main">
+      <div id="todoList"></div>
+    </div>
+
+
+    <dialog id="projectDialog">
+      <form method="dialog">
+        <input type="text" id="newProjectName" placeholder="Project Name">
+        <div class="project-footer">
+          <button type="button" id="cancelProject">Cancel</button>
+          <button type="submit" id="addProject">Add project</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- <div id="projectInput">
+    </div> -->
+
+    <dialog id="todoDialog">
+      <form method="dialog">
+        <input type="text" id="newTodoTitle" placeholder="Task name">
+        <input type="text" id="description" placeholder="Description">
+        <input type="date" id="date" placeholder="Due Date">
+        <select id="newTodoPriority" name="priority" placeholder="Priority">
+          <option value="" disabled selected>Priority</option>
+          <option value="High">High</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <select id="project" name="project"></select>
+        <div class="dialog-footer">
+          <button type="button" id="cancelTodo">Cancel</button>
+          <button type="submit" id="addTodo">Add task</button>
+        </div>
+      </form>
+    </dialog>
   </div>
-
-  <div id="projectList"><h3>My Projects</h3></div>
-
-  <button id="openTodoDialog">+ Add task</button>
-
-  <dialog id="todoDialog">
-    <form method="dialog">
-      <input type="text" id="newTodoTitle" placeholder="Task name">
-      <input type="text" id="description" placeholder="Description">
-      <input type="date" id="date">
-      <select id="newTodoPriority" name="priority">
-        <option value="High">High</option>
-        <option value="Medium" selected>Medium</option>
-        <option value="Low">Low</option>
-      </select>
-      <select id="project" name="project"></select>
-      <button type="submit" id="addTodo">Add task</button>
-      <button type="button" id="cancelTodo">Cancel</button>
-    </form>
-  </dialog>
-
-  <div id="todoList"></div>
 </body>
 </html>

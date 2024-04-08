@@ -1,9 +1,274 @@
 body {
-  background-color: rgb(221, 221, 221);
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 .active-project {
-  background-color: #adadad;
-  color: #333;
+  background-color: rgb(226, 225, 219);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 40px;
+  /* margin-right: 5px; */
+}
 
+.container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  height: 100vh;
+}
+
+.main {
+  background-color: white;
+}
+
+.sidebar {
+  background-color: rgb(244, 243, 238);
+}
+
+.openTodoDialog, .openProjectDialog {
+  display: flex;
+  justify-content: center;
+}
+
+#myproject-title {
+  width: 100%;
+  padding-left: 12px;
+  color: rgb(73, 73, 73);
+  font-weight: 550;
+}
+
+#openTodoDialog, #openProjectDialog {
+  width: 95%;
+  margin-bottom: 10px;
+  border: solid rgb(207, 207, 207);
+  background-color: rgb(244, 243, 238);
+  border-radius: 4px;
+}
+
+#openTodoDialog {
+  margin-top: 5px;
+}
+
+#openTodoDialog:hover, #openProjectDialog:hover {
+  background-color: rgb(226, 225, 219);
+}
+
+#project-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.project-row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 90%;
+  /* padding: 5px; */
+  border-radius: 4px;
+}
+
+.project-row, .project-item {
+  padding: 5px;
+  margin: 0;
+}
+
+.project-item {
+  flex-grow: 1; /* Allows it to grow and fill available space within .project-row */
+  border-radius: 4px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  margin-left: 5px;
+  padding-left: 7px;
+  color: rgb(130, 130, 130);
+}
+
+.delete-project {
+  display: none;
+  flex-grow: 0; /* Prevents the delete button from growing */
+}
+
+.project-row:hover .delete-project {
+  display: block;
+}
+
+.delete-project {
+  border: none;
+  background-color: rgb(226, 225, 219);
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: white;
+}
+
+.project-row:hover {
+  background-color: rgb(226, 225, 219);
+  margin-left: 7px;
+}
+
+#todoDialog {
+  border: solid rgb(207, 207, 207);
+  border-radius: 10px;
+  width: 30%;
+  height: 18vh;
+}
+
+#newTodoTitle {
+  height: 30px;
+  width: 100%;
+  font-weight: 550;
+  border: none;
+}
+
+#newTodoTitle:focus {
+  outline: none;
+}
+
+#description {
+  height: 30px;
+  width: 100%;
+  border: none;
+}
+
+#description:focus {
+  outline: none;
+}
+
+#date {
+  width: 150px;
+  height: 30px;
+  border: none;
+}
+
+#date:focus {
+  outline: none;
+}
+
+#newTodoPriority {
+  width: 100px;
+  height: 30px;
+  border: none;
+}
+
+#newTodoPriority:focus {
+  outline: none;
+}
+
+
+#project {
+  width: 250px;
+  height: 30px;
+  border: none;
+}
+
+#project:focus {
+  outline: none;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  padding-top: 10px; /* Add some space above the buttons */
+}
+
+#todoDialog form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#todoDialog select, #todoDialog input[type="text"], #todoDialog input[type="date"] {
+  margin-bottom: 10px; /* Add some spacing between form elements */
+}
+
+
+#addTodo, #cancelTodo, #cancelProject {
+  width: 80px;
+  height: 30px;
+}
+
+#addProject {
+  width: 100px;
+  height: 30px;
+}
+
+#addTodo {
+  background-color: rgb(235, 62, 62);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  margin-left: 7px;
+}
+
+#cancelTodo {
+  background-color: rgb(240, 240, 240);
+  border-radius: 4px;
+  border: none;
+}
+
+#addTodo:hover {
+  background-color: rgb(208, 58, 58);
+  cursor: pointer;
+}
+#cancelTodo:hover {
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
+}
+
+#projectDialog {
+  height: 7vh;
+}
+
+
+#newProjectName {
+  width: 280px;
+  height: 30px;
+  border: none;
+}
+
+#newProjectName:focus {
+  outline: none;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+#projectDialog {
+  border: solid rgb(207, 207, 207);
+  border-radius: 10px;
+  width: 20%;
+}
+
+#projectDialog form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#addProject {
+  background-color: rgb(235, 62, 62);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  margin-left: 7px;
+}
+
+#cancelProject {
+  background-color: rgb(240, 240, 240);
+  border-radius: 4px;
+  border: none;
+}
+
+
+#addProject:hover {
+  background-color: rgb(208, 58, 58);
+  cursor: pointer;
+}
+#cancelProject:hover {
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
 }
