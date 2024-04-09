@@ -21,7 +21,7 @@ function displayProjects(projects) {
     projectList.appendChild(projectRow)
 
     const deleteBtn = document.createElement("button")
-    deleteBtn.textContent = "Delete"
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>'
     deleteBtn.classList.add("delete-project")
     projectRow.appendChild(deleteBtn)
     projectList.appendChild(projectRow)
@@ -63,32 +63,56 @@ function displayTodos(selectedProject) {
 
   // Display the project name as a header above the todos
   const projectNameHeader = document.createElement('h2');
+  projectNameHeader.classList.add("project-header")
   projectNameHeader.textContent = selectedProject.name;
   todoList.appendChild(projectNameHeader);
 
   // Loop through todos in the selected project and create elements for each
   selectedProject.todos.forEach(todo => {
-    const todoObject = ToDo.fromPlainObject(todo)
+    const todoObject = ToDo.fromPlainObject(todo);
     const todoItem = document.createElement('div');
     todoItem.classList.add('todo-item');
-    todoItem.innerHTML = `
-      <h3>${todoObject.title}</h3>
-      <p>Description: ${todoObject.description}</p>
-      <p>Due Date: ${todoObject.getFormattedDueDate()}</p>
-      <p>Priority: ${todoObject.priority}</p>
-      <label><input type="checkbox" class="todo-done-checkbox" ${todoObject.isComplete ? "checked" : ""}> Done</label>
-      <button class="details">Details</button>
-      <button class="delete-todo">Delete</button>
+
+    // Create a flex container for content and buttons
+    const flexContainer = document.createElement('div');
+    flexContainer.classList.add('todo-flex-container');
+
+    // Checkbox and content
+    const content = document.createElement('div');
+    content.classList.add('todo-content');
+    content.innerHTML = `
+        <label><input type="checkbox" class="todo-done-checkbox" ${todoObject.isComplete ? "checked" : ""}></label>
+        <h3>${todoObject.title}</h3>
+        <p><i class="fa-regular fa-calendar"></i> ${todoObject.getFormattedDueDate()}</p>
     `;
+
+    // Buttons container
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add('todo-buttons');
+    buttonsContainer.innerHTML = `
+      <button class="details"><i class="fas fa-info-circle"></i></button>
+      <button class="delete-todo"><i class="fas fa-trash"></i></button>
+    `;
+
+    // Append content and buttons to the flex container
+    flexContainer.appendChild(content);
+    flexContainer.appendChild(buttonsContainer);
+
+    // Append the flex container to the todo item
+    todoItem.appendChild(flexContainer);
+
+    // Existing event listeners and logic for details, delete, and checkbox
+    // ...
 
     todoItem.querySelector('.details').addEventListener("click", () => {
       const dialog = document.createElement("dialog");
+      dialog.classList.add("dialog-details")
       dialog.innerHTML = `
         <h3>${todoObject.title}</h3>
-        <p>Du e Date: ${todoObject.getFormattedDueDate()}</p>
         <p>Description: ${todoObject.description}</p>
+        <p>Due Date: ${todoObject.getFormattedDueDate()}</p>
         <p>Priority: ${todoObject.priority}</p>
-        <p>Done: ${todoObject.isComplete}</p>
+
         <button class="close-dialog">Close</button>
       `;
       document.body.appendChild(dialog);

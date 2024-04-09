@@ -24,10 +24,13 @@ body {
 }
 
 #myproject-title {
-  width: 100%;
-  padding-left: 12px;
-  color: rgb(73, 73, 73);
+  /* width: 100%; */
+  /* padding-left: 12px; */
+  color: rgb(99, 96, 96);
   font-weight: 550;
+  padding-left: 13px;
+  margin-bottom: 5px;
+  font-size: 15px;
 }
 
 #openTodoDialog, #openProjectDialog {
@@ -36,6 +39,9 @@ body {
   border: solid rgb(207, 207, 207);
   background-color: rgb(244, 243, 238);
   border-radius: 4px;
+  color: rgb(130, 130, 130);
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #openTodoDialog {
@@ -43,7 +49,11 @@ body {
 }
 
 #openTodoDialog:hover, #openProjectDialog:hover {
-  background-color: rgb(226, 225, 219);
+  background-color: rgb(235, 62, 62);
+  color: white;
+  font-weight: 550;
+  cursor: pointer;
+  border: solid rgb(235, 62, 62);
 }
 
 /*TODO: margin right bigger than left */
@@ -75,9 +85,11 @@ body {
   padding-bottom: 10px;
   padding-right: 15px;
   /* margin-left: 5px; */
-  padding-left: 7px;
+  padding-left: 8px;
   color: rgb(130, 130, 130);
+  font-size: 13px;
 }
+
 
 .active-project {
   background-color: rgb(226, 225, 219);
@@ -91,6 +103,7 @@ body {
 .delete-project {
   display: none;
   flex-grow: 0; /* Prevents the delete button from growing */
+  font-size: 13px;
 }
 
 .project-row:hover .delete-project {
@@ -101,6 +114,7 @@ body {
   border: none;
   background-color: rgb(226, 225, 219);
   color: white;
+  margin-right: 5px;
 }
 
 .project-row:hover {
@@ -114,7 +128,8 @@ body {
   border: solid rgb(207, 207, 207);
   border-radius: 10px;
   width: 30%;
-  height: 18vh;
+  height: 25vh;
+  padding-bottom: 8px;
 }
 
 #newTodoTitle {
@@ -219,13 +234,10 @@ body {
   cursor: pointer;
 }
 
-#projectDialog {
-  height: 7vh;
-}
 
 
 #newProjectName {
-  width: 280px;
+  width: 150px;
   height: 30px;
   border: none;
 }
@@ -243,7 +255,8 @@ body {
 #projectDialog {
   border: solid rgb(207, 207, 207);
   border-radius: 10px;
-  width: 20%;
+  width: 25%;
+  height: 7vh;
 }
 
 #projectDialog form {
@@ -273,5 +286,147 @@ body {
 }
 #cancelProject:hover {
   background-color: rgb(226, 226, 226);
+  cursor: pointer;
+}
+
+
+.project-header {
+  font-size: 20px;
+  margin-top: 50px;
+  color: rgb(65, 65, 65);
+}
+#todoList {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.todo-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: solid rgb(234, 234, 234);
+  width: 90%;
+  border-radius: 10px;
+}
+
+.todo-item:hover {
+  background-color: rgb(246, 246, 246);
+}
+
+.todo-content {
+  display: flex;
+  align-items: center; /* Aligns items vertically */
+}
+
+.todo-content h3, .todo-content p {
+  margin-left: 10px; /* Adds spacing between checkbox and text */
+}
+
+.todo-buttons {
+  display: flex;
+  justify-content: flex-end; /* Positions buttons to the right */
+  padding-top: 10px; /* Adds some space between content and buttons */
+}
+
+.todo-item h3 {
+  color: rgb(107, 107, 107);
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.todo-item p {
+  color: rgb(154, 154, 154);
+  font-size: 13px;
+  padding-left: 5px;
+}
+
+.todo-item label {
+  font-size: 20px;
+  color: grey;
+  cursor: pointer;
+}
+
+.todo-item .details {
+  background-color: rgb(240, 240, 240);
+  border-radius: 4px;
+  border: none;
+  width: 50px;
+  height: 30px;
+}
+
+.todo-item .delete-todo {
+  background-color: rgb(235, 62, 62);
+  color: white;
+  border-radius: 4px;
+  border: none;
+  width: 50px;
+  height: 30px;
+  margin-left: 5px;
+}
+
+.dialog-details {
+  border-radius: 10px;
+  border: solid rgb(190, 190, 190);
+  width: 18%;
+}
+
+.dialog-details h3 {
+  color: rgb(103, 103, 103);
+  font-size: 17px;
+}
+
+.dialog-details p {
+  color: rgb(125, 125, 125);
+  font-size: 13px;
+}
+
+.close-dialog {
+  background-color: rgb(235, 62, 62);
+  color: white;
+  border-radius: 4px;
+  border: none;
+  width: 80px;
+  height: 30px;
+}
+
+.todo-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.todo-flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Ensures content takes up the available space, pushing buttons to the right */
+}
+
+
+.todo-buttons button {
+  margin-left: 5px; /* Adds spacing between buttons if desired */
+}
+
+
+.close-dialog:hover {
+  background-color: rgb(208, 58, 58);
+  cursor: pointer;
+}
+.details:hover {
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
+}
+
+.delete-todo:hover {
+  background-color: rgb(208, 58, 58);
   cursor: pointer;
 }
