@@ -71,10 +71,6 @@ document.querySelector('#todoDialog form').addEventListener('submit', function(e
 });
 
 
-
-
-
-
 // document.getElementById('project').addEventListener('change', function() {
 //   const selectedProjectName = this.value;
 //   const selectedProject = projects.find(project => project.name === selectedProjectName);
